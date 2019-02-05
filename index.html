@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+#counter{
+  width: 100px;
+  height: 100px;
+  background-color: lightgreen;
+  position: relative;
+  transition-duration: 1s;
+  left: 0;
+  top: 0;
+}
+.moving{
+	filter: blur(5px);
+	border-radius: 100%;
+	
+}
+body{
+	height: 100vh;
+}
+.centered{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+  
+</head>
+<body>
+<div id="counter">
+  <div class="centered">0</div>
+  </div>
+</body>
+<script type="text/javascript">
+
+var clickCount = 0;
+function getBounds(){
+	var bounds = {};
+
+	bounds.width = $("body").width() - $("#counter").width();
+	bounds.height = $("body").height() - $("#counter").height();
+	return bounds;
+}
+
+
+function getRandomNumber(min,max){
+	return Math.floor(Math.random()*(max-min))+min;
+}
+
+function randomWarpElement(){
+	clickCount++;
+	var bounds = getBounds();
+	var left = getRandomNumber(0,bounds.width);
+	var top = getRandomNumber(0,bounds.height);
+	var rgb = {
+		r: getRandomNumber(0,255),
+		g: getRandomNumber(0,255),
+		b: getRandomNumber(0,255)
+	}
+	$("#counter").css({
+		left: left+'px',
+		top: top+'px',
+		'background-color':`rgb(${rgb.r},${rgb.g},${rgb.b})`
+	}).find('.centered').text(clickCount);
+}
+
+$("#counter").on('mouseover',randomWarpElement);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
